@@ -1,9 +1,7 @@
 ﻿using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
-using System;
 using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Osm.FutureValueCalculator.App.Apps
 {
@@ -16,15 +14,15 @@ namespace Osm.FutureValueCalculator.App.Apps
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<InterestRateModel> GetInterestRate()
+        public InterestRateModel GetInterestRate()
         {
             var httpClient = _httpClientFactory.CreateClient();
 
-            var resp = await httpClient.GetAsync("http://localhost:5001/taxajuros/");
+            var resp = httpClient.GetAsync("https://localhost:44389/taxajuros").Result;
 
             resp.EnsureSuccessStatusCode();
 
-            return await JsonSerializer.DeserializeAsync<InterestRateModel>(await resp.Content.ReadAsStreamAsync());
+            return JsonSerializer.DeserializeAsync<InterestRateModel>(resp.Content.ReadAsStreamAsync().Result).Result;
         }
     }
 }

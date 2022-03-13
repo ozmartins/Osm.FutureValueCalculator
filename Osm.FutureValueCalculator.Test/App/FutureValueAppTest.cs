@@ -12,9 +12,9 @@ namespace Osm.FutureValueCalculator.Test.App
     {
         ///The main goal of this test is just to know if FutureValueApp return FutureValueCalcResult created by the service.
         ///Because off that, I won't create a test for each scenario tested for the FutureValueService class.
-        
-        [TestMethod]        
-        public async void FutureValueAppTest_CalculatingFutureValueWithValidParameters()
+
+        [TestMethod]
+        public void FutureValueAppTest_CalculatingFutureValueWithValidParameters()
         {                        
             #region arrange
             var expectedFutureValue = 123.456m;
@@ -24,13 +24,13 @@ namespace Osm.FutureValueCalculator.Test.App
             futureValueServiceMock.Setup(p => p.CalculateFutureValue(1, 2, 3)).Returns(expectedFutureValueCalcResult);
 
             var interestRateAppMock = new Mock<IInterestRateApp>();
-            interestRateAppMock.Setup(p => p.GetInterestRate());//.Returns(new InterestRateModel() { Value = 2 });
+            interestRateAppMock.Setup(p => p.GetInterestRate()).Returns(new InterestRateModel() { Value = 2 });
 
             var futureValueApp = new FutureValueApp(futureValueServiceMock.Object, interestRateAppMock.Object);
             #endregion
 
             #region act
-            var futureValueServiceResult = await futureValueApp.CalculateFutureValue(1, 3);
+            var futureValueServiceResult = futureValueApp.CalculateFutureValue(1, 3);
             #endregion
 
             #region assert

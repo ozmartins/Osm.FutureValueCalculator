@@ -1,30 +1,41 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Moq.Contrib.HttpClient;
 using Osm.FutureValueCalculator.App.Apps;
+using System;
 using System.Net.Http;
 
 namespace Osm.FutureValueCalculator.Test.App
 {
     [TestClass]
     public class InterestRateAppTest
-    {
-        private readonly IHttpClientFactory _httpClientFactory;
-
-        public InterestRateAppTest(IHttpClientFactory httpClientFactory)
-        {
-            _httpClientFactory = httpClientFactory;
-        }
-
+    {       
         //The main goal of this class is to know if the classe returns the values returned by the remote service.
         //So, I won't execute a test for each possible situação, because it was done in the FutureValueService.
 
         [TestMethod]
-        public async void InterestRateAppTest_GettingValidInterestRate()
+        public void InterestRateAppTest_GettingValidInterestRate()
         {
-            var interestRateApp = new InterestRateApp(_httpClientFactory);
+            //Arrange                       
+            var handler = new Mock<HttpMessageHandler>();
+            var factory = handler.CreateClientFactory();
 
-            var interestRateModel = await interestRateApp.GetInterestRate();
+            Mock.Get(factory).Setup(x => x.CreateClient("Osm.InterestRate.Api"))
+                .Returns(() =>
+                {
+                    var client = handler.CreateClient();
+                    client.BaseAddress = new Uri("http://localhost:5001/taxajuros/");
 
-            Assert.AreEqual(interestRateModel.Value, 0.01);
+                    return client;
+                });
+           
+            handler.SetupRequest(HttpMethod.Get, "http://localhost:5001/taxajuros/").ReturnsResponse("{'Value':0.01}");
+
+            //Act
+            var taxaJurosAplic = new InterestRateApp(factory).GetInterestRate();
+
+            //Test
+            Assert.AreEqual(0.01f, taxaJurosAplic.Value);
         }        
     }
 }

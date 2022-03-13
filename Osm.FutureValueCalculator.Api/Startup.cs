@@ -17,9 +17,11 @@ namespace Osm.FutureValueCalculator.Api
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {
+        {          
             services.AddDependencyInjection();
-            
+
+            services.AddHttpClient();
+
             services.AddControllers();
             
             services.AddCustomSwagger();

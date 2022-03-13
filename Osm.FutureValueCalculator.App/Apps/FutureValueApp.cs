@@ -1,11 +1,10 @@
 ﻿using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
-using System.Threading.Tasks;
 
 namespace Osm.FutureValueCalculator.App.Apps
 {
-    public class FutureValueApp
+    public class FutureValueApp : IFutureValueApp
     {
         private readonly IFutureValueService _futureValueService;
 
@@ -17,9 +16,9 @@ namespace Osm.FutureValueCalculator.App.Apps
             _interestRateApp = interestRateApp;
         }
 
-        public async Task<FutureValueCalcResult> CalculateFutureValue(decimal presentValue, int months)
+        public FutureValueCalcResult CalculateFutureValue(decimal presentValue, int months)
         {
-            var interestRateModel = await _interestRateApp.GetInterestRate();
+            var interestRateModel = _interestRateApp.GetInterestRate();
 
             return _futureValueService.CalculateFutureValue(presentValue, interestRateModel.Value, months);
         }
