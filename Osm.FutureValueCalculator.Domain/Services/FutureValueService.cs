@@ -1,12 +1,13 @@
-﻿using Osm.FutureValueCalculator.Domain.Models;
+﻿using Osm.FutureValueCalculator.Domain.Interfaces;
+using Osm.FutureValueCalculator.Domain.Models;
 using System;
 using System.Collections.Generic;
 
 namespace Osm.FutureValueCalculator.Domain.Services
 {
-    public class FutureValueService
+    public class FutureValueService : IFutureValueService
     {
-        public FutureValueServiceResult CalculateFutureValue(decimal presentValue, double monthlyInterestRate, int months)
+        public FutureValueCalcResult CalculateFutureValue(decimal presentValue, double monthlyInterestRate, int months)
         {
             try
             {
@@ -20,7 +21,7 @@ namespace Osm.FutureValueCalculator.Domain.Services
 
                 var truncatedFutureValue = Math.Truncate(futureValue * 100) / 100;
 
-                return new FutureValueServiceResult()
+                return new FutureValueCalcResult()
                 {
                     Success = true,
                     FutureValue = truncatedFutureValue
@@ -28,7 +29,7 @@ namespace Osm.FutureValueCalculator.Domain.Services
             }            
             catch (Exception e)
             {
-                return new FutureValueServiceResult()
+                return new FutureValueCalcResult()
                 {
                     Success = false,
                     Errors = new List<string>() { e.Message }
@@ -36,7 +37,7 @@ namespace Osm.FutureValueCalculator.Domain.Services
             }            
         }
 
-        private FutureValueServiceResult _validateParameters(decimal presentValue, int months)
+        private FutureValueCalcResult _validateParameters(decimal presentValue, int months)
         {
             //Note that I didn't validate then negative interest rate.
             //I have made that decision because some countries work with negative interest rates.
@@ -54,7 +55,7 @@ namespace Osm.FutureValueCalculator.Domain.Services
                 errors.Add("The number of months can't be lower than zero.");
             }
 
-            return new FutureValueServiceResult()
+            return new FutureValueCalcResult()
             {
                 Success = errors.Count == 0,
                 Errors = errors

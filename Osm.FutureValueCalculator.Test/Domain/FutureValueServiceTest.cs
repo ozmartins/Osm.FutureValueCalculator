@@ -18,13 +18,13 @@ namespace Osm.FutureValueCalculator.Test.Domain
             #endregion
 
             #region act     
-            var futureValueResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
+            var futureValueCalcResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
             #endregion
 
             #region asssert  
-            Assert.IsTrue(futureValueResult.Success);
-            Assert.AreEqual(futureValueResult.Errors.Count, 0);
-            Assert.AreEqual(futureValueResult.FutureValue, expectedFutureValue);
+            Assert.IsTrue(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 0);
+            Assert.AreEqual(futureValueCalcResult.FutureValue, expectedFutureValue);
             #endregion
         }
         
@@ -41,15 +41,15 @@ namespace Osm.FutureValueCalculator.Test.Domain
             #endregion
 
             #region act     
-            var futureValueResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
+            var futureValueCalcResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
             #endregion
 
             #region asssert  
-            Assert.IsFalse(futureValueResult.Success);
-            Assert.AreEqual(futureValueResult.Errors.Count, 2);
-            Assert.AreEqual(futureValueResult.Errors[0], expectedErrorMessage1);
-            Assert.AreEqual(futureValueResult.Errors[1], expectedErrorMessage2);
-            Assert.AreEqual(futureValueResult.FutureValue, 0);
+            Assert.IsFalse(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 2);
+            Assert.AreEqual(futureValueCalcResult.Errors[0], expectedErrorMessage1);
+            Assert.AreEqual(futureValueCalcResult.Errors[1], expectedErrorMessage2);
+            Assert.AreEqual(futureValueCalcResult.FutureValue, 0);
             #endregion
         }
 
@@ -65,13 +65,13 @@ namespace Osm.FutureValueCalculator.Test.Domain
             #endregion
 
             #region act     
-            var futureValueResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
+            var futureValueCalcResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
             #endregion
 
             #region asssert  
-            Assert.IsTrue(futureValueResult.Success);
-            Assert.AreEqual(futureValueResult.Errors.Count, 0);
-            Assert.AreEqual(futureValueResult.FutureValue, expectedFutureValue);
+            Assert.IsTrue(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 0);
+            Assert.AreEqual(futureValueCalcResult.FutureValue, expectedFutureValue);
             #endregion
         }
 
@@ -87,14 +87,14 @@ namespace Osm.FutureValueCalculator.Test.Domain
             #endregion
 
             #region act
-            var futureValueResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
+            var futureValueCalcResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
             #endregion
 
             #region assert
-            Assert.IsFalse(futureValueResult.Success);
-            Assert.AreEqual(futureValueResult.Errors.Count, 1);
-            Assert.AreEqual(futureValueResult.Errors[0], expectedErrorMessage);            
-            Assert.AreEqual(futureValueResult.FutureValue, 0);
+            Assert.IsFalse(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 1);
+            Assert.AreEqual(futureValueCalcResult.Errors[0], expectedErrorMessage);            
+            Assert.AreEqual(futureValueCalcResult.FutureValue, 0);
             #endregion
         }
 
@@ -110,13 +110,13 @@ namespace Osm.FutureValueCalculator.Test.Domain
             #endregion
 
             #region act     
-            var futureValueResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
+            var futureValueCalcResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
             #endregion
 
             #region asssert  
-            Assert.IsTrue(futureValueResult.Success);
-            Assert.AreEqual(futureValueResult.Errors.Count, 0);
-            Assert.AreEqual(futureValueResult.FutureValue, expectedFutureValue);
+            Assert.IsTrue(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 0);
+            Assert.AreEqual(futureValueCalcResult.FutureValue, expectedFutureValue);
             #endregion
         }
 
@@ -132,13 +132,13 @@ namespace Osm.FutureValueCalculator.Test.Domain
             #endregion
 
             #region act     
-            var futureValueResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
+            var futureValueCalcResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
             #endregion
 
             #region asssert  
-            Assert.IsTrue(futureValueResult.Success);
-            Assert.AreEqual(futureValueResult.Errors.Count, 0);
-            Assert.AreEqual(futureValueResult.FutureValue, expectedFutureValue);
+            Assert.IsTrue(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 0);
+            Assert.AreEqual(futureValueCalcResult.FutureValue, expectedFutureValue);
             #endregion
         }
 
@@ -154,13 +154,13 @@ namespace Osm.FutureValueCalculator.Test.Domain
             #endregion
 
             #region act     
-            var futureValueResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
+            var futureValueCalcResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
             #endregion
 
             #region asssert  
-            Assert.IsTrue(futureValueResult.Success);
-            Assert.AreEqual(futureValueResult.Errors.Count, 0);
-            Assert.AreEqual(futureValueResult.FutureValue, expectedFutureValue);
+            Assert.IsTrue(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 0);
+            Assert.AreEqual(futureValueCalcResult.FutureValue, expectedFutureValue);
             #endregion
         }
 
@@ -176,13 +176,13 @@ namespace Osm.FutureValueCalculator.Test.Domain
             #endregion
 
             #region act     
-            var futureValueResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
+            var futureValueCalcResult = futureValueService.CalculateFutureValue(presentValue, monthlyInterestRate, months);
             #endregion
 
             #region asssert  
-            Assert.IsTrue(futureValueResult.Success);
-            Assert.AreEqual(futureValueResult.Errors.Count, 0);
-            Assert.AreEqual(futureValueResult.FutureValue, expectedFutureValue);
+            Assert.IsTrue(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 0);
+            Assert.AreEqual(futureValueCalcResult.FutureValue, expectedFutureValue);
             #endregion
         }        
     }
