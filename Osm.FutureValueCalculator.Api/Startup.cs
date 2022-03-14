@@ -4,9 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Osm.FutureValueCalculator.Api.Extensions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Osm.FutureValueCalculator.Api
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)

@@ -10,22 +10,18 @@ namespace Osm.FutureValueCalculator.App.Apps
 {
     public class InterestRateApp : IInterestRateApp
     {
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _client;
 
-        public InterestRateApp(IHttpClientFactory httpClientFactory)
+        public InterestRateApp(HttpClient client)
         {
-            _httpClientFactory = httpClientFactory;
+            _client = client;
         }
 
-        public async Task<InterestRateModel> GetInterestRate()
-        {
-            HttpClient client = new HttpClient();
+        public async Task<InterestRateModel> GetInterestRateAsync(string interestRateApiUrl)
+        {            
+            InterestRateModel interestRateModel = null;            
 
-            InterestRateModel interestRateModel = null;
-
-            var url = Environment.GetEnvironmentVariable("INTEREST_RATE_API");
-
-            HttpResponseMessage response = await client.GetAsync(url);
+            HttpResponseMessage response = await _client.GetAsync(interestRateApiUrl);
 
             if (response.IsSuccessStatusCode)
             {

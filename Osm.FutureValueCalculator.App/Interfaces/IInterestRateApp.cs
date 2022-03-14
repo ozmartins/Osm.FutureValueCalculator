@@ -5,6 +5,6 @@ namespace Osm.FutureValueCalculator.App.Interfaces
 {
     public interface IInterestRateApp
     {
-        Task<InterestRateModel> GetInterestRate();
+        Task<InterestRateModel> GetInterestRateAsync(string interestRateApiUrl);
     }
 }
