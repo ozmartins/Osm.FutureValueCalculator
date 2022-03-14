@@ -3,7 +3,6 @@ using Osm.FutureValueCalculator.App.Apps;
 using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Interfaces;
 using Osm.FutureValueCalculator.Domain.Services;
-using System.Net.Http;
 
 namespace Osm.FutureValueCalculator.Api.Extensions
 {

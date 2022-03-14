@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Osm.FutureValueCalculator.App.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Osm.FutureValueCalculator.Api.Controllers
 {
@@ -18,11 +19,11 @@ namespace Osm.FutureValueCalculator.Api.Controllers
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public ActionResult Get([FromRoute(Name= "ValorInicial")] decimal presentValue, [FromRoute(Name = "Meses")] int months)
+        public async Task<ActionResult> Get([FromQuery(Name = "ValorInicial")] decimal presentValue, [FromQuery(Name = "Meses")] int months)
         {
             try
             {
-                var futureValueCalcResult = _futureValueApp.CalculateFutureValue(presentValue, months);
+                var futureValueCalcResult = await _futureValueApp.CalculateFutureValue(presentValue, months);
 
                 if (futureValueCalcResult == null)
                 {
