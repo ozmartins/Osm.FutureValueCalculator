@@ -23,14 +23,23 @@ namespace Osm.FutureValueCalculator.App.Apps
         {           
             var interestRateResult = await _interestRateApp.GetInterestRateAsync(ConfigVars.InterestRateApiUrl());
 
-            if (interestRateResult == null || interestRateResult?.InterestRateModel == null)
+            if (interestRateResult == null)
             {
                 return new FutureValueCalcResult()
                 {
                     Success = false,
                     Errors = new List<string>() { "The interest rate API didn't return any data. Please contact tech support." }
                 };
-            }            
+            }
+
+            if (interestRateResult.InterestRateModel == null)
+            {
+                return new FutureValueCalcResult()
+                {
+                    Success = false,
+                    Errors = new List<string>() { "The interest rate API returned null interest rate data. Please contact tech support." }
+                };
+            }
 
             var FutureValueCalcResult = _futureValueService.CalculateFutureValue(presentValue, interestRateResult.InterestRateModel.Value, months);
 

@@ -57,9 +57,7 @@ namespace Osm.FutureValueCalculator.Test.App
         [TestMethod]
         public async Task FutureValueAppTest_CalculatingFutureValueWithNullInterestRateResult()
         {
-            #region arrange
-            var fakeUrl = "http://www.teste.com";
-
+            #region arrange            
             var expectedErrorMessage = "The interest rate API didn't return any data. Please contact tech support.";
 
             var expectedFutureValueCalcResult = new FutureValueCalcResult()
@@ -75,7 +73,50 @@ namespace Osm.FutureValueCalculator.Test.App
 
             var interestRateAppMock = new Mock<IInterestRateApp>();
             interestRateAppMock
-                .Setup(x => x.GetInterestRateAsync(fakeUrl).Result);
+                .Setup(x => x.GetInterestRateAsync(ConfigVars.InterestRateApiUrl()).Result);
+
+            var futureValueApp = new FutureValueApp(futureValueServiceMock.Object, interestRateAppMock.Object);
+            #endregion
+
+            #region act
+            var futureValueCalcResult = await futureValueApp.CalculateFutureValue(1.0m, 3);
+            #endregion
+
+            #region assert
+            Assert.IsNotNull(futureValueCalcResult);
+            Assert.IsFalse(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.Errors.Count, 1);
+            Assert.AreEqual(futureValueCalcResult.Errors[0], expectedErrorMessage);
+            #endregion
+        }
+
+        [TestMethod]
+        public async Task FutureValueAppTest_CalculatingFutureValueWithNullInterestRateModel()
+        {
+            #region arrange
+            var expectedErrorMessage = "The interest rate API returned null interest rate data. Please contact tech support.";
+
+            var expectedFutureValueCalcResult = new FutureValueCalcResult()
+            {
+                Success = true,
+                FutureValue = 123.45m
+            };
+
+            var expectedGetInterestRateResult = new GetInterestRateResult()
+            {
+                Success = true,
+                InterestRateModel = null
+            };
+
+            var futureValueServiceMock = new Mock<IFutureValueService>();
+            futureValueServiceMock
+                .Setup(x => x.CalculateFutureValue(1.0m, 2.0f, 3))
+                .Returns(expectedFutureValueCalcResult);
+
+            var interestRateAppMock = new Mock<IInterestRateApp>();
+            interestRateAppMock
+                .Setup(x => x.GetInterestRateAsync(ConfigVars.InterestRateApiUrl()))
+                .ReturnsAsync(expectedGetInterestRateResult);
 
             var futureValueApp = new FutureValueApp(futureValueServiceMock.Object, interestRateAppMock.Object);
             #endregion
