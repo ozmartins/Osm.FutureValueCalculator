@@ -1,4 +1,4 @@
-﻿using Osm.FutureValueCalculator.App.Extensions;
+﻿using Osm.FutureValueCalculator.App.Infra;
 using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
@@ -32,7 +32,9 @@ namespace Osm.FutureValueCalculator.App.Apps
                 };
             }            
 
-            return _futureValueService.CalculateFutureValue(presentValue, interestRateResult.InterestRateModel.Value, months);
+            var FutureValueCalcResult = _futureValueService.CalculateFutureValue(presentValue, interestRateResult.InterestRateModel.Value, months);
+
+            return FutureValueCalcResult;
         }
     }
 }

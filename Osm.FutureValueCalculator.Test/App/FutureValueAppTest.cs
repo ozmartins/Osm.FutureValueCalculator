@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Osm.FutureValueCalculator.App.Apps;
+using Osm.FutureValueCalculator.App.Infra;
 using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.App.Models;
 using Osm.FutureValueCalculator.Domain.Interfaces;
@@ -16,19 +17,17 @@ namespace Osm.FutureValueCalculator.Test.App
         [TestMethod]
         public async Task FutureValueAppTest_CalculatingFutureValueWithValidParameters()
         {
-            #region arrange
-            var fakeUrl = "http://www.teste.com";
-
+            #region arrange            
             var expectedFutureValueCalcResult = new FutureValueCalcResult()
             { 
                 Success = true,
                 FutureValue = 123.45m
             };
 
-            var expectedInterestRateResult = new GetInterestRateResult()
+            var expectedGetInterestRateResult = new GetInterestRateResult()
             {
                 Success = true,
-                InterestRateModel = new InterestRateModel()
+                InterestRateModel = new InterestRateModel() { Value = 2 }
             };
 
             var futureValueServiceMock = new Mock<IFutureValueService>();
@@ -38,8 +37,8 @@ namespace Osm.FutureValueCalculator.Test.App
 
             var interestRateAppMock = new Mock<IInterestRateApp>();
             interestRateAppMock
-                .Setup(x => x.GetInterestRateAsync(fakeUrl).Result)
-                .Returns(expectedInterestRateResult);
+                .Setup(x => x.GetInterestRateAsync(ConfigVars.InterestRateApiUrl()))
+                .ReturnsAsync(expectedGetInterestRateResult);
 
             var futureValueApp = new FutureValueApp(futureValueServiceMock.Object, interestRateAppMock.Object);
             #endregion

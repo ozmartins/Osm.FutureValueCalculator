@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Osm.FutureValueCalculator.App.Extensions
+namespace Osm.FutureValueCalculator.App.Infra
 {
     public static class ConfigVars
     {
