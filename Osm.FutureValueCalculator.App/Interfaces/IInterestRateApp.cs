@@ -1,10 +1,10 @@
-﻿using Osm.FutureValueCalculator.Domain.Models;
+﻿using Osm.FutureValueCalculator.App.Models;
 using System.Threading.Tasks;
 
 namespace Osm.FutureValueCalculator.App.Interfaces
 {
     public interface IInterestRateApp
     {
-        Task<InterestRateModel> GetInterestRateAsync(string interestRateApiUrl);
+        Task<GetInterestRateResult> GetInterestRateAsync(string interestRateApiUrl);
     }
 }

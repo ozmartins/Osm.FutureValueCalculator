@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Osm.FutureValueCalculator.Domain.Models
+namespace Osm.FutureValueCalculator.App.Models
 {
     [ExcludeFromCodeCoverage]
     public class InterestRateModel
