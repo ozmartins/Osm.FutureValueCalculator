@@ -17,7 +17,11 @@ namespace Osm.FutureValueCalculator.Test.App
         [TestMethod]
         public async Task FutureValueAppTest_CalculatingFutureValueWithValidParameters()
         {
-            #region arrange            
+            #region arrange    
+            var presentValue = 100m;
+            var months = 10;
+            var monthlyInterestRate = 1f;
+
             var expectedFutureValueCalcResult = new FutureValueCalcResult()
             { 
                 Success = true,
@@ -27,12 +31,12 @@ namespace Osm.FutureValueCalculator.Test.App
             var expectedGetInterestRateResult = new GetInterestRateResult()
             {
                 Success = true,
-                InterestRateModel = new InterestRateModel() { Value = 2 }
+                InterestRateModel = new InterestRateModel() { Value = monthlyInterestRate }
             };
 
             var futureValueServiceMock = new Mock<IFutureValueService>();
             futureValueServiceMock
-                .Setup(x => x.CalculateFutureValue(1.0m, 2.0f, 3))
+                .Setup(x => x.CalculateFutureValue(presentValue, monthlyInterestRate, months))
                 .Returns(expectedFutureValueCalcResult);
 
             var interestRateAppMock = new Mock<IInterestRateApp>();
@@ -44,7 +48,7 @@ namespace Osm.FutureValueCalculator.Test.App
             #endregion
 
             #region act
-            var futureValueCalcResult = await futureValueApp.CalculateFutureValue(1.0m, 3);
+            var futureValueCalcResult = await futureValueApp.CalculateFutureValueAsync(presentValue, months);
             #endregion
 
             #region assert
@@ -58,6 +62,10 @@ namespace Osm.FutureValueCalculator.Test.App
         public async Task FutureValueAppTest_CalculatingFutureValueWithNullInterestRateResult()
         {
             #region arrange            
+            var presentValue = 100m;
+            var months = 10;
+            var monthlyInterestRate = 1f;
+
             var expectedErrorMessage = "The interest rate API didn't return any data. Please contact tech support.";
 
             var expectedFutureValueCalcResult = new FutureValueCalcResult()
@@ -68,7 +76,7 @@ namespace Osm.FutureValueCalculator.Test.App
 
             var futureValueServiceMock = new Mock<IFutureValueService>();
             futureValueServiceMock
-                .Setup(x => x.CalculateFutureValue(1.0m, 2.0f, 3))
+                .Setup(x => x.CalculateFutureValue(presentValue, monthlyInterestRate, months))
                 .Returns(expectedFutureValueCalcResult);
 
             var interestRateAppMock = new Mock<IInterestRateApp>();
@@ -79,7 +87,7 @@ namespace Osm.FutureValueCalculator.Test.App
             #endregion
 
             #region act
-            var futureValueCalcResult = await futureValueApp.CalculateFutureValue(1.0m, 3);
+            var futureValueCalcResult = await futureValueApp.CalculateFutureValueAsync(presentValue, months);
             #endregion
 
             #region assert
@@ -94,12 +102,17 @@ namespace Osm.FutureValueCalculator.Test.App
         public async Task FutureValueAppTest_CalculatingFutureValueWithNullInterestRateModel()
         {
             #region arrange
+            var presentValue = 100m;
+            var months = 10;
+            var monthlyInterestRate = 1f;
+            var futureValue = 1000m;
+
             var expectedErrorMessage = "The interest rate API returned null interest rate data. Please contact tech support.";
 
             var expectedFutureValueCalcResult = new FutureValueCalcResult()
             {
                 Success = true,
-                FutureValue = 123.45m
+                FutureValue = futureValue
             };
 
             var expectedGetInterestRateResult = new GetInterestRateResult()
@@ -110,7 +123,7 @@ namespace Osm.FutureValueCalculator.Test.App
 
             var futureValueServiceMock = new Mock<IFutureValueService>();
             futureValueServiceMock
-                .Setup(x => x.CalculateFutureValue(1.0m, 2.0f, 3))
+                .Setup(x => x.CalculateFutureValue(presentValue, monthlyInterestRate, months))
                 .Returns(expectedFutureValueCalcResult);
 
             var interestRateAppMock = new Mock<IInterestRateApp>();
@@ -122,7 +135,7 @@ namespace Osm.FutureValueCalculator.Test.App
             #endregion
 
             #region act
-            var futureValueCalcResult = await futureValueApp.CalculateFutureValue(1.0m, 3);
+            var futureValueCalcResult = await futureValueApp.CalculateFutureValueAsync(presentValue, months);
             #endregion
 
             #region assert

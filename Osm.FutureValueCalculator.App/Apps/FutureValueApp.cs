@@ -19,7 +19,7 @@ namespace Osm.FutureValueCalculator.App.Apps
             _interestRateApp = interestRateApp;
         }
 
-        public async Task<FutureValueCalcResult> CalculateFutureValue(decimal presentValue, int months)
+        public async Task<FutureValueCalcResult> CalculateFutureValueAsync(decimal presentValue, int months)
         {           
             var interestRateResult = await _interestRateApp.GetInterestRateAsync(ConfigVars.InterestRateApiUrl());
 

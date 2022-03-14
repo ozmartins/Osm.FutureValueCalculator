@@ -16,10 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Api\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Osm.FutureValueCalculator.Api\Osm.FutureValueCalculator.Api.csproj" />
     <ProjectReference Include="..\Osm.FutureValueCalculator.App\Osm.FutureValueCalculator.App.csproj" />
     <ProjectReference Include="..\Osm.FutureValueCalculator.Domain\Osm.FutureValueCalculator.Domain.csproj" />
   </ItemGroup>

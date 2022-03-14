@@ -23,7 +23,7 @@ namespace Osm.FutureValueCalculator.Api.Controllers
         {
             try
             {
-                var futureValueCalcResult = await _futureValueApp.CalculateFutureValue(presentValue, months);
+                var futureValueCalcResult = await _futureValueApp.CalculateFutureValueAsync(presentValue, months);
 
                 if (futureValueCalcResult == null)
                 {

@@ -5,6 +5,6 @@ namespace Osm.FutureValueCalculator.App.Interfaces
 {
     public interface IFutureValueApp
     {
-        Task<FutureValueCalcResult> CalculateFutureValue(decimal presentValue, int months);
+        Task<FutureValueCalcResult> CalculateFutureValueAsync(decimal presentValue, int months);
     }
 }
