@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
+using System;
 using System.Net.Http;
 
 using System.Threading.Tasks;
@@ -22,7 +23,9 @@ namespace Osm.FutureValueCalculator.App.Apps
 
             InterestRateModel interestRateModel = null;
 
-            HttpResponseMessage response = await client.GetAsync("https://localhost:44389/taxajuros");
+            var url = Environment.GetEnvironmentVariable("INTEREST_RATE_API");
+
+            HttpResponseMessage response = await client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {
