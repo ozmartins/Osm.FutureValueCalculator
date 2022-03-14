@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.App.Models;
-using Osm.FutureValueCalculator.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 

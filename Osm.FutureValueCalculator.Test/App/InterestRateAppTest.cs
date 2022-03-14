@@ -1,9 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Moq.Contrib.HttpClient;
+using Newtonsoft.Json;
 using Osm.FutureValueCalculator.App.Apps;
-using System;
+using Osm.FutureValueCalculator.App.Models;
+using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Osm.FutureValueCalculator.Test.App
 {
@@ -14,28 +17,64 @@ namespace Osm.FutureValueCalculator.Test.App
         //So, I won't execute a test for each possible situation, because it was done by FutureValueServiceTest.
 
         [TestMethod]
-        public void InterestRateAppTest_GettingValidInterestRate()
+        public async Task InterestRateAppTest_GettingOkResult()
         {
-            //Arrange                       
+            #region arrange           
+            var expectedInterestRate = 0.1f;
+            var fakeUrl = "http://www.test.com";                                   
+            var fakeInteresRateModel = new InterestRateModel() { Value = expectedInterestRate };
+                       
             var handler = new Mock<HttpMessageHandler>();
-            var factory = handler.CreateClientFactory();
+            var fakeHttpClient = handler.CreateClient();
+            
+            handler
+                .SetupRequest(HttpMethod.Get, fakeUrl)
+                .ReturnsResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(fakeInteresRateModel), "application/json");
 
-            Mock.Get(factory).Setup(x => x.CreateClient("Osm.InterestRate.Api"))
-                .Returns(() =>
-                {
-                    var client = handler.CreateClient();
-                    client.BaseAddress = new Uri("http://localhost:5001/taxajuros/");
+            var interestRateApp = new InterestRateApp(fakeHttpClient);
+            #endregion
 
-                    return client;
-                });
-           
-            handler.SetupRequest(HttpMethod.Get, "http://localhost:5001/taxajuros/").ReturnsResponse("{'Value':0.01}");
+            #region act
+            var getInterestRateResult = await interestRateApp.GetInterestRateAsync(fakeUrl);
+            #endregion
 
-            //Act
-            //var taxaJurosAplic = new InterestRateApp(factory).GetInterestRate();
+            #region assert
+            Assert.IsNotNull(getInterestRateResult);
+            Assert.IsTrue(getInterestRateResult.Success);            
+            Assert.IsNotNull(getInterestRateResult.InterestRateModel);            
+            Assert.AreEqual(getInterestRateResult.InterestRateModel.Value, expectedInterestRate);
+            #endregion
+        }
 
-            //Test
-            //Assert.AreEqual(0.01f, taxaJurosAplic.Value);
-        }        
+        [TestMethod]
+        public async Task InterestRateAppTest_GettingInternalServerError()
+        {
+            #region arrange                       
+            var fakeUrl = "http://www.test.com";
+            var fakeInteresRateModel = new InterestRateModel() { Value = 0 };
+
+            var handler = new Mock<HttpMessageHandler>();
+            var fakeHttpClient = handler.CreateClient();
+
+            handler
+                .SetupRequest(HttpMethod.Get, fakeUrl)
+                .ReturnsResponse(HttpStatusCode.InternalServerError, "", "application/json");
+
+            var interestRateApp = new InterestRateApp(fakeHttpClient);
+            #endregion
+
+            #region act
+            var getInterestRateResult = await interestRateApp.GetInterestRateAsync(fakeUrl);
+            #endregion
+
+            #region assert
+            Assert.IsNotNull(getInterestRateResult);
+            Assert.IsFalse(getInterestRateResult.Success);
+            Assert.IsNotNull(getInterestRateResult.InterestRateModel);
+            Assert.AreEqual(getInterestRateResult.InterestRateModel.Value, 0);
+            Assert.AreEqual(getInterestRateResult.Errors.Count, 1);
+            Assert.AreEqual(getInterestRateResult.Errors[0], "Internal Server Error");
+            #endregion
+        }
     }
 }

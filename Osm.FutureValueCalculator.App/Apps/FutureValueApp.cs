@@ -2,7 +2,6 @@
 using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,7 +11,7 @@ namespace Osm.FutureValueCalculator.App.Apps
     {
         private readonly IFutureValueService _futureValueService;
 
-        private readonly IInterestRateApp _interestRateApp;
+        private readonly IInterestRateApp _interestRateApp;        
 
         public FutureValueApp(IFutureValueService futureValueService, IInterestRateApp interestRateApp)
         {

@@ -1,9 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Osm.FutureValueCalculator.App.Apps;
-using Osm.FutureValueCalculator.App.Interfaces;
+using Osm.FutureValueCalculator.App.Models;
 using Osm.FutureValueCalculator.Domain.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
+using System.Threading.Tasks;
 
 namespace Osm.FutureValueCalculator.Test.App
 {
@@ -14,30 +15,44 @@ namespace Osm.FutureValueCalculator.Test.App
         ///Because off that, I won't create a test for each scenario tested for the FutureValueService class.
 
         [TestMethod]
-        public void FutureValueAppTest_CalculatingFutureValueWithValidParameters()
-        {                        
+        public async Task FutureValueAppTest_CalculatingFutureValueWithValidParameters()
+        {
             #region arrange
-            var expectedFutureValue = 123.456m;
-            var expectedFutureValueCalcResult = new FutureValueCalcResult() { Success = true, FutureValue = expectedFutureValue };
+            var fakeUrl = "http://www.teste.com";
+
+            var expectedFutureValueCalcResult = new FutureValueCalcResult() 
+            { 
+                Success = true,
+                FutureValue = 123.45m
+            };
+
+            var expectedInterestRateResult = new GetInterestRateResult()
+            {
+                Success = true,
+                InterestRateModel = new InterestRateModel()
+            };
 
             var futureValueServiceMock = new Mock<IFutureValueService>();
-            futureValueServiceMock.Setup(p => p.CalculateFutureValue(1, 2, 3)).Returns(expectedFutureValueCalcResult);
+            futureValueServiceMock
+                .Setup(x => x.CalculateFutureValue(1.0m, 2.0f, 3))
+                .Returns(expectedFutureValueCalcResult);
 
-            var interestRateAppMock = new Mock<IInterestRateApp>();
-            //interestRateAppMock.Setup(p => p.GetInterestRate()).Returns(new InterestRateModel() { Value = 2 });
+            var interestRateAppMock = new Mock<InterestRateApp>();
+            interestRateAppMock
+                .Setup(x => x.GetInterestRateAsync(fakeUrl).Result)
+                .Returns(expectedInterestRateResult);
 
             var futureValueApp = new FutureValueApp(futureValueServiceMock.Object, interestRateAppMock.Object);
             #endregion
 
             #region act
-            var futureValueServiceResult = futureValueApp.CalculateFutureValue(1, 3);
+            var futureValueCalcResult = await futureValueApp.CalculateFutureValue(1.0m, 3);
             #endregion
 
             #region assert
-            Assert.IsNotNull(futureValueServiceResult);
-            //Assert.IsTrue(futureValueServiceResult.Success);
-            //Assert.AreEqual(futureValueServiceResult.Errors.Count, 0);
-            //Assert.AreEqual(futureValueServiceResult.FutureValue, expectedFutureValue);
+            Assert.IsNotNull(futureValueCalcResult);
+            Assert.IsTrue(futureValueCalcResult.Success);
+            Assert.AreEqual(futureValueCalcResult.FutureValue, expectedFutureValueCalcResult.FutureValue);
             #endregion
         }
     }
