@@ -4,6 +4,7 @@ using Moq;
 using Osm.FutureValueCalculator.Api.Controllers;
 using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace Osm.FutureValueCalculator.Test.Api
@@ -59,6 +60,38 @@ namespace Osm.FutureValueCalculator.Test.Api
             var futureValueAppMock = new Mock<IFutureValueApp>();
             futureValueAppMock
                 .Setup(x => x.CalculateFutureValueAsync(presentValue, months));                
+
+            var futureValueController = new FutureValueController(futureValueAppMock.Object);
+            #endregion
+
+            #region act
+            var actionResult = await futureValueController.Get(presentValue, months);
+            #endregion
+
+            #region assert            
+            Assert.IsNotNull(actionResult);
+            Assert.IsInstanceOfType(actionResult, typeof(ObjectResult));
+            Assert.AreEqual(((ObjectResult)actionResult).StatusCode, 500);
+
+            Assert.IsNotNull(((ObjectResult)actionResult).Value);
+            Assert.IsTrue(((ObjectResult)actionResult).Value is string);
+
+            Assert.AreEqual(((ObjectResult)actionResult).Value, expectedErrorMessage);
+            #endregion
+        }
+
+        [TestMethod]
+        public async Task FutureValueControllerTest_ExceptionWhenGettingFutureValue()
+        {
+            #region             
+            var presentValue = 100m;
+            var months = 10;
+            var expectedErrorMessage = "Test";
+
+            var futureValueAppMock = new Mock<IFutureValueApp>();
+            futureValueAppMock
+                .Setup(x => x.CalculateFutureValueAsync(presentValue, months))
+                .Throws(new Exception(expectedErrorMessage));
 
             var futureValueController = new FutureValueController(futureValueAppMock.Object);
             #endregion

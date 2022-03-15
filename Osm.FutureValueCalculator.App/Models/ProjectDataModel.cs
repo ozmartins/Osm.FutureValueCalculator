@@ -1,5 +1,8 @@
-﻿namespace Osm.FutureValueCalculator.App.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Osm.FutureValueCalculator.App.Models
 {
+    [ExcludeFromCodeCoverage]
     public class ProjectDataModel
     {
         public string Description{ get; set; }

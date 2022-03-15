@@ -8,18 +8,18 @@ namespace Osm.FutureValueCalculator.Api.Controllers
     [Route("ShowMeTheCode")]
     public class ShowMeTheCodeController : ControllerBase
     {
-        private IOptions<ShowMeTheCodeModel> _showMeTheCodeModel;
+        private IOptions<ShowMeTheCodeModel> _showMeTheCodeModelOptions;
 
-        public ShowMeTheCodeController(IOptions<ShowMeTheCodeModel> showMeTheCodeModel)
+        public ShowMeTheCodeController(IOptions<ShowMeTheCodeModel> showMeTheCodeModelOptions)
         {
-            _showMeTheCodeModel = showMeTheCodeModel;
+            _showMeTheCodeModelOptions = showMeTheCodeModelOptions;
         }
 
         [HttpGet]
         [ProducesResponseType(200)]        
         public ActionResult Get()
         {
-            return Ok(_showMeTheCodeModel);
+            return Ok(_showMeTheCodeModelOptions.Value);
         }
     }
 }
