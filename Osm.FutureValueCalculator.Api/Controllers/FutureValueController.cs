@@ -3,6 +3,7 @@ using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Osm.FutureValueCalculator.Api.Controllers
@@ -29,15 +30,15 @@ namespace Osm.FutureValueCalculator.Api.Controllers
                 var futureValueCalcResult = await _futureValueApp.CalculateFutureValueAsync(presentValue, months);
 
                 if (futureValueCalcResult == null)
-                {
-                    return StatusCode(500, Constants.NullInterestRateMessage);
+                {                    
+                    return StatusCode(500, new FutureValueCalcResult() { Errors = new List<string>() { Constants.NullInterestRateMessage } });
                 }
 
                 return Ok(futureValueCalcResult);
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
+                return StatusCode(500, new FutureValueCalcResult() { Errors = new List<string>(){ e.Message }  }) ;
             }
 
         }        
