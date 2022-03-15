@@ -28,7 +28,7 @@ namespace Osm.FutureValueCalculator.Test.App
                 FutureValue = 123.45m
             };
 
-            var expectedGetInterestRateResult = new GetInterestRateResult()
+            var expectedGetInterestRateResult = new InterestRateResultModel()
             {
                 Success = true,
                 InterestRateModel = new InterestRateModel() { Value = monthlyInterestRate }
@@ -115,7 +115,7 @@ namespace Osm.FutureValueCalculator.Test.App
                 FutureValue = futureValue
             };
 
-            var expectedGetInterestRateResult = new GetInterestRateResult()
+            var expectedGetInterestRateResult = new InterestRateResultModel()
             {
                 Success = true,
                 InterestRateModel = null

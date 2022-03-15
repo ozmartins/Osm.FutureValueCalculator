@@ -17,7 +17,7 @@ namespace Osm.FutureValueCalculator.App.Apps
             _client = client;
         }
 
-        public async Task<GetInterestRateResult> GetInterestRateAsync(string interestRateApiUrl)
+        public async Task<InterestRateResultModel> GetInterestRateAsync(string interestRateApiUrl)
         {                       
             HttpResponseMessage response = await _client.GetAsync(interestRateApiUrl);
 
@@ -25,7 +25,7 @@ namespace Osm.FutureValueCalculator.App.Apps
             {
                 var content = await response.Content.ReadAsStringAsync();
 
-                return new GetInterestRateResult()
+                return new InterestRateResultModel()
                 {
                     Success = true,
                     InterestRateModel = JsonConvert.DeserializeObject<InterestRateModel>(content)
@@ -33,7 +33,7 @@ namespace Osm.FutureValueCalculator.App.Apps
             }
             else
             {
-                return new GetInterestRateResult()
+                return new InterestRateResultModel()
                 {
                     Success = false,
                     Errors = new List<string> { response.ReasonPhrase }

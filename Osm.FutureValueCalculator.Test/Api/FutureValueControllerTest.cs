@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Osm.FutureValueCalculator.Api.Controllers;
-using Osm.FutureValueCalculator.App.Apps;
 using Osm.FutureValueCalculator.App.Interfaces;
 using Osm.FutureValueCalculator.Domain.Models;
 using System.Threading.Tasks;

@@ -2,7 +2,7 @@
 
 namespace Osm.FutureValueCalculator.App.Models
 {
-    public class GetInterestRateResult
+    public class InterestRateResultModel
     {
         public bool Success { get; set; } = false;
         public List<string> Errors { get; set; } = new List<string>();

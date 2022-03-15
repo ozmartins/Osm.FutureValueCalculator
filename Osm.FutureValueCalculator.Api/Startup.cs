@@ -27,6 +27,8 @@ namespace Osm.FutureValueCalculator.Api
             services.AddControllers();
             
             services.AddCustomSwagger();
+
+            services.AddCustomAppSettings(Configuration);
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
