@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Osm.FutureValueCalculator.App.Interfaces;
+using Osm.FutureValueCalculator.Domain.Models;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
 
@@ -19,7 +21,8 @@ namespace Osm.FutureValueCalculator.Api.Controllers
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
-        public async Task<ActionResult> Get([FromQuery(Name = "ValorInicial")] decimal presentValue, [FromQuery(Name = "Meses")] int months)
+        [SwaggerOperation(Summary = Constants.FutureValueGetSummary, Description = Constants.FutureValueGetDescription, Tags = new[] { Constants.FutureValueTag })]
+        public async Task<ActionResult<FutureValueCalcResult>> Get([FromQuery(Name = "ValorInicial")] decimal presentValue, [FromQuery(Name = "Meses")] int months)
         {
             try
             {
@@ -27,7 +30,7 @@ namespace Osm.FutureValueCalculator.Api.Controllers
 
                 if (futureValueCalcResult == null)
                 {
-                    return StatusCode(500, "Something went wrong. The system couldn't find the interest rate. Please, contact tech support or try again later.");
+                    return StatusCode(500, Constants.NullInterestRateMessage);
                 }
 
                 return Ok(futureValueCalcResult);
@@ -37,6 +40,6 @@ namespace Osm.FutureValueCalculator.Api.Controllers
                 return StatusCode(500, e.Message);
             }
 
-        }
+        }        
     }
 }
