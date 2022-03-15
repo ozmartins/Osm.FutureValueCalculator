@@ -39,7 +39,7 @@ cd Osm.FutureValueCalculator\Osm.FutureValueCalculator.Api
 Next, you have to set an environment variable (the command below applies to Windows)
 
 ```
-set INTEREST_RATE_API=https://localhost:5001/taxajuros
+setx INTEREST_RATE_API https://localhost:5001/taxajuros
 ```
 
 Finally, run the app using the command shown below:
@@ -48,7 +48,7 @@ Finally, run the app using the command shown below:
 dotnet run --project Osm.FutureValueCalculator.Api.csproj
 ```
 
-Now, the app is running and you can try it accessing the URL https://localhost:5001
+Now, the app is running and you can try it accessing the URL https://localhost:5003
 
 ## Quick Reference
 
