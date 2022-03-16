@@ -24,6 +24,9 @@ To see the app running in a production environment, access https://osm-future-va
 
 ## Running locally
 
+> **⚠ WARNING**  
+> You must run InterestRateAPI before executing FutureValueCalculatorAPI. So, please, follow the instructions available at the following address https://github.com/ozmartins/Osm.InterestRate#running-locally
+
 First, clone the project to your local machine using the following command:
 
 ```
