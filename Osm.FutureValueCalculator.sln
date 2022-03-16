@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osm.FutureValueCalculator.Api", "Osm.FutureValueCalculator.Api\Osm.FutureValueCalculator.Api.csproj", "{903F29D1-9FD7-4087-AA51-E97C7D994197}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osm.FutureValueCalculator.Domain", "Osm.FutureValueCalculator.Domain\Osm.FutureValueCalculator.Domain.csproj", "{D104FEC4-49C0-47DA-8D8D-FBDDE52D32DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osm.FutureValueCalculator.Domain", "Osm.FutureValueCalculator.Domain\Osm.FutureValueCalculator.Domain.csproj", "{D104FEC4-49C0-47DA-8D8D-FBDDE52D32DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osm.FutureValueCalculator.Test", "Osm.FutureValueCalculator.Test\Osm.FutureValueCalculator.Test.csproj", "{6EA7CDF8-87EB-47CF-90B8-6588704E3041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osm.FutureValueCalculator.Test", "Osm.FutureValueCalculator.Test\Osm.FutureValueCalculator.Test.csproj", "{6EA7CDF8-87EB-47CF-90B8-6588704E3041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osm.FutureValueCalculator.App", "Osm.FutureValueCalculator.App\Osm.FutureValueCalculator.App.csproj", "{1FA801E1-D024-433D-87B4-AFA7A6EC9EF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osm.FutureValueCalculator.App", "Osm.FutureValueCalculator.App\Osm.FutureValueCalculator.App.csproj", "{1FA801E1-D024-433D-87B4-AFA7A6EC9EF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osm.FutureValueCalculator.IntegrationTest", "Osm.FutureValueCalculator.IntegrationTest\Osm.FutureValueCalculator.IntegrationTest.csproj", "{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1FA801E1-D024-433D-87B4-AFA7A6EC9EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FA801E1-D024-433D-87B4-AFA7A6EC9EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FA801E1-D024-433D-87B4-AFA7A6EC9EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

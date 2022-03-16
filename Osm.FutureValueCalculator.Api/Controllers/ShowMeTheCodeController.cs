@@ -21,7 +21,7 @@ namespace Osm.FutureValueCalculator.Api.Controllers
         [SwaggerOperation(Summary = Constants.ShowMeTheCodeGetSummary, Description = Constants.ShowMeTheCodeGetDescription, Tags = new[] { Constants.ShowMeTheCodeTag })]
         public ActionResult<ShowMeTheCodeModel> Get()
         {
-            return Ok(_showMeTheCodeModelOptions.Value);
+            return Ok(_showMeTheCodeModelOptions.Value);            
         }
     }
 }
