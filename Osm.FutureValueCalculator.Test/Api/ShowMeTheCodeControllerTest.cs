@@ -49,18 +49,18 @@ namespace Osm.FutureValueCalculator.Test.Api
 
             #region assert            
             Assert.IsNotNull(actionResult);
-            Assert.IsInstanceOfType(actionResult, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(actionResult.Result, typeof(OkObjectResult));
 
-            /*Assert.IsNotNull(((OkObjectResult)actionResult).Value);
-            Assert.IsInstanceOfType(((OkObjectResult)actionResult).Value, typeof(ShowMeTheCodeModel));
+            Assert.IsNotNull(((OkObjectResult)actionResult.Result).Value);
+            Assert.IsInstanceOfType(((OkObjectResult)actionResult.Result).Value, typeof(ShowMeTheCodeModel));
 
-            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult).GitHub.Description, expectedGitHubDescription);
-            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult).GitHub.InterestRateUrl, expectedGitHubInterestRateUrl);
-            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult).GitHub.FutureValueCalculatorUrl, expectedGitHubFutureValueCalculatorUrl);
+            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult.Result).GitHub.Description, expectedGitHubDescription);
+            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult.Result).GitHub.InterestRateUrl, expectedGitHubInterestRateUrl);
+            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult.Result).GitHub.FutureValueCalculatorUrl, expectedGitHubFutureValueCalculatorUrl);
 
-            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult).Heroku.Description, expectedHerokuDescription);
-            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult).Heroku.InterestRateUrl, expectedHerokuInterestRateUrl);
-            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult).Heroku.FutureValueCalculatorUrl, expectedHerokuFutureValueCalculatorUrl);*/
+            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult.Result).Heroku.Description, expectedHerokuDescription);
+            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult.Result).Heroku.InterestRateUrl, expectedHerokuInterestRateUrl);
+            Assert.AreEqual(_getShowMeTheCodeModelFrom(actionResult.Result).Heroku.FutureValueCalculatorUrl, expectedHerokuFutureValueCalculatorUrl);
             #endregion
         }
 

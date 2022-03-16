@@ -40,12 +40,12 @@ namespace Osm.FutureValueCalculator.Test.Api
 
             #region assert            
             Assert.IsNotNull(actionResult);
-            Assert.IsInstanceOfType(actionResult, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(actionResult.Result, typeof(OkObjectResult));
 
-            /*Assert.IsNotNull(((OkObjectResult)actionResult).Value);
-            Assert.IsInstanceOfType(((OkObjectResult)actionResult).Value, typeof(FutureValueCalcResult));
+            Assert.IsNotNull(((OkObjectResult)actionResult.Result).Value);
+            Assert.IsInstanceOfType(((OkObjectResult)actionResult.Result).Value, typeof(FutureValueCalcResult));
 
-            Assert.AreEqual(_getFutureValueCalcResultFrom(actionResult).FutureValue, expectedFutureValue);*/
+            Assert.AreEqual(_getFutureValueCalcResultFrom(actionResult.Result).FutureValue, expectedFutureValue);
             #endregion
         }
 
@@ -70,13 +70,12 @@ namespace Osm.FutureValueCalculator.Test.Api
 
             #region assert            
             Assert.IsNotNull(actionResult);
-            Assert.IsInstanceOfType(actionResult, typeof(ObjectResult));
-            /*Assert.AreEqual(((ObjectResult)actionResult).StatusCode, 500);
-
-            Assert.IsNotNull(((ObjectResult)actionResult).Value);
-            Assert.IsTrue(((ObjectResult)actionResult).Value is string);
-
-            Assert.AreEqual(((ObjectResult)actionResult).Value, expectedErrorMessage);*/
+            Assert.IsInstanceOfType(actionResult.Result, typeof(ObjectResult));
+            Assert.AreEqual(((ObjectResult)actionResult.Result).StatusCode, 500);
+            Assert.IsNotNull(((ObjectResult)actionResult.Result).Value);
+            Assert.IsInstanceOfType(((ObjectResult)actionResult.Result).Value, typeof(FutureValueCalcResult));
+            Assert.AreEqual(((FutureValueCalcResult)((ObjectResult)actionResult.Result).Value).Errors.Count, 1);
+            Assert.AreEqual(((FutureValueCalcResult)((ObjectResult)actionResult.Result).Value).Errors[0], expectedErrorMessage);
             #endregion
         }
 
@@ -102,13 +101,12 @@ namespace Osm.FutureValueCalculator.Test.Api
 
             #region assert            
             Assert.IsNotNull(actionResult);
-            Assert.IsInstanceOfType(actionResult, typeof(ObjectResult));
-            /*Assert.AreEqual(((ObjectResult)actionResult).StatusCode, 500);
-
-            Assert.IsNotNull(((ObjectResult)actionResult).Value);
-            Assert.IsTrue(((ObjectResult)actionResult).Value is string);
-
-            Assert.AreEqual(((ObjectResult)actionResult).Value, expectedErrorMessage);*/
+            Assert.IsInstanceOfType(actionResult.Result, typeof(ObjectResult));
+            Assert.AreEqual(((ObjectResult)actionResult.Result).StatusCode, 500);
+            Assert.IsNotNull(((ObjectResult)actionResult.Result).Value);
+            Assert.IsInstanceOfType(((ObjectResult)actionResult.Result).Value, typeof(FutureValueCalcResult));
+            Assert.AreEqual(((FutureValueCalcResult)((ObjectResult)actionResult.Result).Value).Errors.Count, 1);
+            Assert.AreEqual(((FutureValueCalcResult)((ObjectResult)actionResult.Result).Value).Errors[0], expectedErrorMessage);
             #endregion
         }
 
