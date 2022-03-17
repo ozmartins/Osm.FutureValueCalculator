@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  osm.futurevaluecalculator.api:
+    image: ${DOCKER_REGISTRY-}osmfuturevaluecalculatorapi
+    build:
+      context: .
+      dockerfile: Osm.FutureValueCalculator.Api/Dockerfile

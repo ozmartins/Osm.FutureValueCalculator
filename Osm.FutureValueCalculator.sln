@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osm.FutureValueCalculator.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osm.FutureValueCalculator.App", "Osm.FutureValueCalculator.App\Osm.FutureValueCalculator.App.csproj", "{1FA801E1-D024-433D-87B4-AFA7A6EC9EF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Osm.FutureValueCalculator.IntegrationTest", "Osm.FutureValueCalculator.IntegrationTest\Osm.FutureValueCalculator.IntegrationTest.csproj", "{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Osm.FutureValueCalculator.IntegrationTest", "Osm.FutureValueCalculator.IntegrationTest\Osm.FutureValueCalculator.IntegrationTest.csproj", "{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F3F8806D-0186-4E69-ADFF-E51DF910A2B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ECACF12-DED4-4C70-A136-0A8EBAC9F9E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F8806D-0186-4E69-ADFF-E51DF910A2B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F8806D-0186-4E69-ADFF-E51DF910A2B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F8806D-0186-4E69-ADFF-E51DF910A2B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F8806D-0186-4E69-ADFF-E51DF910A2B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
