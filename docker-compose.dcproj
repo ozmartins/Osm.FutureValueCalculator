@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>f3f8806d-0186-4e69-adff-e51df910a2b8</ProjectGuid>
+    <ProjectGuid>ad306528-5b6d-41c3-9731-7fcd365f808e</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>osm.futurevaluecalculator.api</DockerServiceName>
