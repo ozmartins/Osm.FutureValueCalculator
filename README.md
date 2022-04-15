@@ -13,7 +13,7 @@ This API has two endpoints. The first receives a present value and a number of m
 
 This project is using some libraries and frameworks:
 
- - [.NET 5.0](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
+ - [.NET 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
  - [Docker](https://docs.docker.com/)
  - [MSTest](https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.testtools.unittesting?view=visualstudiosdk-2022)
  - [Swagger](https://swagger.io/)
